@@ -2,24 +2,32 @@
 
 ## Project Overview
 
-This project demonstrates the implementation of a Library Management System using SQL. It includes creating and managing tables, performing CRUD operations, and executing advanced SQL queries. The goal is to showcase skills in database design, manipulation, and querying.
+This project showcases the development of a Library Management System using SQL. It involves designing and managing database tables, executing CRUD operations, and running advanced SQL queries. The objective is to demonstrate proficiency in database design, data manipulation, and query execution.
 
 ![Library_project](library.jpg)
 
 ## Objectives
 
-1. **Set up the Library Management System Database**: Create and populate the database with tables for branches, employees, members, books, issued status, and return status.
-2. **CRUD Operations**: Perform Create, Read, Update, and Delete operations on the data.
-3. **CTAS (Create Table As Select)**: Utilize CTAS to create new tables based on query results.
-4. **Advanced SQL Queries**: Develop complex queries to analyze and retrieve specific data.
+1. **Database Setup**: Establish and populate a Library Management System database with tables for branches, employees, members, books, issued status, and return status.
+2. **CRUD Operations**: Execute Create, Read, Update, and Delete operations to manage the data effectively.
+3. **CTAS (Create Table As Select)**: Leverage CTAS to generate new tables based on query results.
+4. **Advanced SQL Queries**: Construct complex queries to extract, analyze, and retrieve specific data insights.
 
 ## Project Structure
 
 ### 1. Database Setup
 ![ERD](library_erd.png)
 
-- **Database Creation**: Created a database named `library_db`.
-- **Table Creation**: Created tables for branches, employees, members, books, issued status, and return status. Each table includes relevant columns and relationships.
+- **Database Creation**: Designed and impemented a database named `library_db`.
+- **Table Creation**: Designed and structured tables for branches, employees, members, books, issued status, and return status, incorporating relevant columns and relationships.
+
+
+
+
+
+
+
+
 
 ```sql
 CREATE DATABASE library_db;
@@ -107,10 +115,10 @@ CREATE TABLE return_status
 
 ### 2. CRUD Operations
 
-- **Create**: Inserted sample records into the `books` table.
-- **Read**: Retrieved and displayed data from various tables.
-- **Update**: Updated records in the `employees` table.
-- **Delete**: Removed records from the `members` table as needed.
+- **Create**: Added sample records to the `books` table.
+- **Read**: Queried and retrieved data from multiple tables.
+- **Update**: Modified records in the `employees` table.
+- **Delete**: Deleted records from the `members` table as required.
 
 **Task 1. Create a New Book Record**
 -- "978-1-60129-456-2', 'To Kill a Mockingbird', 'Classic', 6.00, 'yes', 'Harper Lee', 'J.B. Lippincott & Co.')"
@@ -172,16 +180,16 @@ GROUP BY b.isbn, b.book_title;
 
 ### 4. Data Analysis & Findings
 
-The following SQL queries were used to address specific questions:
+The following SQL queries were executed to answer specific queries: 
 
-Task 7. **Retrieve All Books in a Specific Category**:
+**Task 7: Retrieve All Books in a Specific Category**:
 
 ```sql
 SELECT * FROM books
 WHERE category = 'Classic';
 ```
 
-8. **Task 8: Find Total Rental Income by Category**:
+**Task 8: Find Total Rental Income by Category**:
 
 ```sql
 SELECT 
@@ -196,13 +204,13 @@ ON b.isbn = ist.issued_book_isbn
 GROUP BY 1
 ```
 
-9. **List Members Who Registered in the Last 180 Days**:
+**Task 9: List Members Who Registered in the Last 180 Days**:
 ```sql
 SELECT * FROM members
 WHERE reg_date >= CURRENT_DATE - INTERVAL '180 days';
 ```
 
-10. **List Employees with Their Branch Manager's Name and their branch details**:
+**Task 10: List Employees with Their Branch Manager's Name and their branch details**:
 
 ```sql
 SELECT 
@@ -221,14 +229,14 @@ employees as e2
 ON e2.emp_id = b.manager_id
 ```
 
-Task 11. **Create a Table of Books with Rental Price Above a Certain Threshold**:
+**Task 11: Create a Table of Books with Rental Price Above a Certain Threshold**:
 ```sql
 CREATE TABLE expensive_books AS
 SELECT * FROM books
 WHERE rental_price > 7.00;
 ```
 
-Task 12: **Retrieve the List of Books Not Yet Returned**
+**Task 12: Retrieve the List of Books Not Yet Returned**
 ```sql
 SELECT * FROM issued_status as ist
 LEFT JOIN
@@ -401,12 +409,8 @@ branch as b
 ON e.branch_id = b.branch_id
 GROUP BY 1, 2
 ```
+**Task 18: Stored Procedure**
 
-**Task 18: Identify Members Issuing High-Risk Books**  
-Write a query to identify members who have issued books more than twice with the status "damaged" in the books table. Display the member name, book title, and the number of times they've issued damaged books.    
-
-
-**Task 19: Stored Procedure**
 Objective:
 Create a stored procedure to manage the status of books in a library system.
 Description:
@@ -470,30 +474,25 @@ WHERE isbn = '978-0-375-41398-8'
 ```
 
 
-
-**Task 20: Create Table As Select (CTAS)**
-Objective: Create a CTAS (Create Table As Select) query to identify overdue books and calculate fines.
-
-Description: Write a CTAS query to create a new table that lists each member and the books they have issued but not returned within 30 days. The table should include:
-    The number of overdue books.
-    The total fines, with each day's fine calculated at $0.50.
-    The number of books issued by each member.
-    The resulting table should show:
-    Member ID
-    Number of overdue books
-    Total fines
-
-
-
 ## Reports
 
-- **Database Schema**: Detailed table structures and relationships.
-- **Data Analysis**: Insights into book categories, employee salaries, member registration trends, and issued books.
-- **Summary Reports**: Aggregated data on high-demand books and employee performance.
+-  Created a database to manage library books, employees, members, and book issuance details.
+
+- Designed and populated tables for tracking book availability, rental prices, and return statuses.
+
+- Implemented CRUD operations to insert, update, retrieve, and delete records efficiently.
+
+- Developed stored procedures to automate book issuance, ensuring only available books can be issued.
+
+- Utilized CTAS to create new tables based on complex queries for better data organization.
+
+- Executed advanced SQL queries to analyze book quality, track issued books, and monitor employee activity.
 
 ## Conclusion
 
-This project demonstrates the application of SQL skills in creating and managing a library management system. It includes database setup, data manipulation, and advanced querying, providing a solid foundation for data management and analysis.
+This Library Management System database project effectively tracks book issuance, return statuses, employee activities, and rental details. The stored procedures enhance automation, ensuring efficient library operations. By utilizing SQL techniques like CRUD operations, CTAS, and advanced queries, this project demonstrates strong database management capabilities.
+
+Special shoutout to [Zero Analyst](https://www.youtube.com/@zero_analyst) for making making this repository possible.
 
 ## How to Use
 
@@ -505,14 +504,3 @@ This project demonstrates the application of SQL skills in creating and managing
 2. **Set Up the Database**: Execute the SQL scripts in the `database_setup.sql` file to create and populate the database.
 3. **Run the Queries**: Use the SQL queries in the `analysis_queries.sql` file to perform the analysis.
 4. **Explore and Modify**: Customize the queries as needed to explore different aspects of the data or answer additional questions.
-
-## Author - Zero Analyst
-
-This project showcases SQL skills essential for database management and analysis. For more content on SQL and data analysis, connect with me through the following channels:
-
-- **YouTube**: [Subscribe to my channel for tutorials and insights](https://www.youtube.com/@zero_analyst)
-- **Instagram**: [Follow me for daily tips and updates](https://www.instagram.com/zero_analyst/)
-- **LinkedIn**: [Connect with me professionally](https://www.linkedin.com/in/najirr)
-- **Discord**: [Join our community for learning and collaboration](https://discord.gg/36h5f2Z5PK)
-
-Thank you for your interest in this project!
